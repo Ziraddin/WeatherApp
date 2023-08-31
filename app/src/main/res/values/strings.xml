@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="location">Location</string>
+    <string name="_5_days_forecast">5-days forecast</string>
+    <string name="manage_cities">Manage Cities</string>
+    <string name="enter_location">Enter location</string>
+</resources>

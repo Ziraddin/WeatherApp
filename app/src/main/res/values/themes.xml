@@ -1,0 +1,16 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.WeatherApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowTranslucentStatus">
+            false
+        </item>
+
+        <item name="android:statusBarColor">
+            @android:color/transparent
+        </item>
+    </style>
+
+    <style name="Theme.WeatherApp" parent="Base.Theme.WeatherApp" />
+</resources>
