@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import com.example.weatherapp.Constants.Constants
 import com.example.weatherapp.Constants.Constants.data
+import com.example.weatherapp.Constants.Constants.locations
 import com.example.weatherapp.Data.Response.WeatherData
 import com.example.weatherapp.Retrofit.RetrofitClient
 import com.example.weatherapp.UI.Main.MainActivity
@@ -45,10 +46,11 @@ class AddCity : AppCompatActivity() {
         binding.searchCityEditText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val drawable = binding.searchCityEditText.compoundDrawables[2]
-                if (drawable != null && event.rawX >= binding.searchCityEditText.right - drawable.bounds.width()) {
+                if (drawable != null && event.rawX >= binding.searchCityEditText.right - drawable.bounds.width() - 50) {
                     var cityName = binding.searchCityEditText.text.toString().trim().lowercase()
                     if (cityName.isNotEmpty()) {
                         getCityWeatherData(cityName, this)
+                        locations.add(cityName)
                     } else {
                         Toast.makeText(this, "Please enter a city name", Toast.LENGTH_SHORT).show()
                     }
@@ -58,7 +60,7 @@ class AddCity : AppCompatActivity() {
         }
     }
 
-    private fun getCityWeatherData(cityName: String, context: Context) {
+    fun getCityWeatherData(cityName: String, context: Context) {
         RetrofitClient.getWeatherData()
             .getWeatherData(cityName, Constants.API_KEY_WEATHER_DATA, "metric")
             ?.enqueue(object : Callback<WeatherData?> {
@@ -71,7 +73,11 @@ class AddCity : AppCompatActivity() {
                         data.add(res)
                         binding.searchCityEditText.text.clear()
                     } else {
-                        Toast.makeText(context, "$cityName is already added", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            context,
+                            "$cityName is already added",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 }

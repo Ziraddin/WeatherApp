@@ -19,6 +19,7 @@ import retrofit2.Response
 class MainViewModel : ViewModel() {
 
     var result_data = MutableLiveData<WeatherData>()
+    var lastData = MutableLiveData<WeatherData>()
 
     fun getCurrentWeatherData(context: Context, lat: String, lon: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -43,6 +44,24 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun getCityWeatherData(cityName: String, context: Context) {
+        RetrofitClient.getWeatherData()
+            .getWeatherData(cityName, Constants.API_KEY_WEATHER_DATA, "metric")
+            ?.enqueue(object : Callback<WeatherData?> {
+
+                override fun onResponse(
+                    call: Call<WeatherData?>, response: Response<WeatherData?>
+                ) {
+                    val res = response.body() as WeatherData
+                    data.add(res)
+                    lastData.postValue(res)
+                }
+
+                override fun onFailure(call: Call<WeatherData?>, t: Throwable) {
+                    Toast.makeText(context, "Failed to get data!", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
 
     fun getWeatherImage(context: Context, condition: String) {
         CoroutineScope(Dispatchers.IO).launch {

@@ -53,5 +53,4 @@ class ViewPagerAdapter(var data: MutableList<WeatherData>) :
             .into(holder.conditionIcon)
 
     }
-
 }

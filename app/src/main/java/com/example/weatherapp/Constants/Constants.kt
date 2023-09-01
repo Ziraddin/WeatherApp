@@ -10,4 +10,6 @@ object Constants {
     const val IMAGE_URL = "https://openweathermap.org/img/wn/"
 
     var data = mutableListOf<WeatherData>()
+    var locations = mutableSetOf<String>()
+    var counter = 0
 }
