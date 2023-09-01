@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.weatherapp"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"
@@ -67,5 +67,6 @@ dependencies {
     //Location services
     implementation("com.google.android.gms:play-services-location:21.0.1")
 
-
+    //Biometric Authetication
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
 }

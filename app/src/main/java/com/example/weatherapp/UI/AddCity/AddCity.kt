@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.example.weatherapp.Constants.Constants
 import com.example.weatherapp.Constants.Constants.data
 import com.example.weatherapp.Data.Response.WeatherData
@@ -20,6 +21,9 @@ import retrofit2.Response
 class AddCity : AppCompatActivity() {
     lateinit var binding: ActivityAddCityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(
+            window, false
+        )
         binding = ActivityAddCityBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
