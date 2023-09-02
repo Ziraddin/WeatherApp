@@ -40,3 +40,4 @@ To add a new city, click the plus or add button in the top-left corner of the ma
 Search for a city and add it to your list of tracked locations.
 
 Return to the main screen, and you can swipe through the added cities using the ViewPager. The ViewPager indicator will show the current city being viewed.
+

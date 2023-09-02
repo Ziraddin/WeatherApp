@@ -4,13 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#03A9F4">
-
-    <ImageView
-        android:id="@+id/conditionImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="condition" />
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/linearLayout"

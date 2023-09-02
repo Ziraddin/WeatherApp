@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.example.weatherapp.Adapters.ViewPagerAdapter
 import com.example.weatherapp.Constants.Constants.counter
 import com.example.weatherapp.Constants.Constants.data
 import com.example.weatherapp.Constants.Constants.locations
+import com.example.weatherapp.R
 import com.example.weatherapp.UI.AddCity.AddCity
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -51,6 +53,18 @@ class MainActivity : AppCompatActivity() {
         setUpAddBtn()
         setUpObservers()
         setUpViewPager()
+        playVideo()
+    }
+
+    fun playVideo() {
+        val video = binding.conditionVideo
+        val videoResId = R.raw.partlycloudly
+        val videoUri = Uri.parse("android.resource://${packageName}/${videoResId}")
+        video.setVideoURI(videoUri)
+        video.start()
+        video.setOnCompletionListener { it ->
+            it.start()
+        }
     }
 
     fun saveLocations() {
@@ -87,8 +101,7 @@ class MainActivity : AppCompatActivity() {
         ) {
             ActivityCompat.requestPermissions(
                 this, arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
                 ), PERMISSION_REQUEST_CODE
             )
         } else {

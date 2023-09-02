@@ -7,6 +7,12 @@
     android:background="#03A9F4"
     tools:context=".UI.Main.MainActivity">
 
+    <VideoView
+        android:id="@+id/conditionVideo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="condition" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
