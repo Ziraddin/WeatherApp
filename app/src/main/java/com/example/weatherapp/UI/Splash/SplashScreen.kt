@@ -1,6 +1,7 @@
 package com.example.weatherapp.UI.Splash
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,12 +15,30 @@ class SplashScreen : AppCompatActivity() {
 
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        fingerPrintAuth()
+        sharedPreferences = getSharedPreferences("MyPref", MODE_PRIVATE)
+        if (!isVerified()) {
+            fingerPrintAuth()
+        } else {
+            val intent = Intent(this@SplashScreen, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
+
+    fun verify() {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("biometricSignIn", true)
+        editor.apply()
+    }
+
+    fun isVerified(): Boolean {
+        return sharedPreferences.getBoolean("biometricSignIn", false)
+    }
 
     fun fingerPrintAuth() {
         checkBiometricCapabilities()
@@ -35,6 +54,7 @@ class SplashScreen : AppCompatActivity() {
                     super.onAuthenticationSucceeded(result)
                     displayMessage("Authentication succeeded!")
                     val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                    verify()
                     startActivity(intent)
                     finish()
                 }
