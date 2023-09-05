@@ -44,21 +44,36 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("MyPref", MODE_PRIVATE)
 
 
-        if (counter == 0) {
-            getLocations()
-        }
-        locations.addAll(sharedPreferences.getStringSet("locations", emptySet())!!)
-        saveLocations()
         getUserLocation()
+        when (counter) {
+            404 -> saveLocations()
+            0 -> getLocations()
+            else -> {
+                locations.addAll(sharedPreferences.getStringSet("locations", emptySet())!!)
+                saveLocations()
+            }
+        }
         setUpAddBtn()
         setUpObservers()
         setUpViewPager()
-        playVideo()
+        binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                playVideo(position)
+            }
+        })
     }
 
-    fun playVideo() {
+    fun playVideo(position: Int) {
         val video = binding.conditionVideo
-        val videoResId = R.raw.partlycloudly
+        val videoResId = when (data[position].weather[0].description) {
+            "scattered clouds" -> R.raw.partlycloudly
+            "broken clouds" -> R.raw.partlycloudly
+            "few clouds" -> R.raw.cloudy
+            "clear sky" -> R.raw.sunny
+            "thunderstorm" -> R.raw.stormy
+            else -> R.raw.cloudy
+        }
         val videoUri = Uri.parse("android.resource://${packageName}/${videoResId}")
         video.setVideoURI(videoUri)
         video.start()
@@ -101,7 +116,8 @@ class MainActivity : AppCompatActivity() {
         ) {
             ActivityCompat.requestPermissions(
                 this, arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
                 ), PERMISSION_REQUEST_CODE
             )
         } else {

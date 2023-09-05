@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.Constants.Constants
 import com.example.weatherapp.Constants.Constants.data
+import com.example.weatherapp.Constants.Constants.locations
 import com.example.weatherapp.Data.Response.WeatherData
 import com.example.weatherapp.Data.Response.WeatherImage
 import com.example.weatherapp.Retrofit.RetrofitClient
@@ -32,7 +33,7 @@ class MainViewModel : ViewModel() {
                     ) {
                         val res = response.body() as WeatherData
                         if (res !in data) {
-                            data.add(res)
+                            data.add(0, res)
                             result_data.postValue(res)
                         }
                     }
@@ -53,8 +54,11 @@ class MainViewModel : ViewModel() {
                     call: Call<WeatherData?>, response: Response<WeatherData?>
                 ) {
                     val res = response.body() as WeatherData
-                    data.add(res)
-                    lastData.postValue(res)
+                    if (res.name !in locations) {
+                        locations.add(res.name.toString())
+                        data.add(res)
+                        lastData.postValue(res)
+                    }
                 }
 
                 override fun onFailure(call: Call<WeatherData?>, t: Throwable) {

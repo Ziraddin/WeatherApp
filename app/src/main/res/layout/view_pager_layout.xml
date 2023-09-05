@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/locationTv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="48dp"
+        android:layout_weight="2"
+        android:fontFamily="@font/ubuntu_medium"
         android:gravity="center"
+        android:text="@string/location"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
 
-        <TextView
-            android:id="@+id/locationTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/location"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="35dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/locationArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="0.1"
+        android:rotation="45"
+        android:src="@drawable/arrow"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/locationTv"
+        app:layout_constraintStart_toEndOf="@+id/locationTv"
+        app:layout_constraintTop_toTopOf="@+id/locationTv" />
 
     <TextView
         android:id="@+id/descTV"
@@ -70,14 +65,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:fontFamily="@font/ubuntu_medium"
+        android:fontFamily="@font/montserrat_alternates_medium"
         android:text="33"
         android:textColor="@color/white"
-        android:textSize="100sp"
+        android:textSize="110sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/locationTv" />
 
     <ImageView
         android:id="@+id/conditionIcon"
@@ -92,16 +87,19 @@
         app:layout_constraintTop_toBottomOf="@+id/descTV"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:gravity="center"
+        android:background="@drawable/bg"
+        android:elevation="15dp"
         android:orientation="vertical"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descTV"
         app:layout_constraintVertical_bias="0.0">
@@ -114,7 +112,6 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/ubuntu_light"
             android:text="Min Temp: "
-            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -126,7 +123,6 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/ubuntu_light"
             android:text="Max Temp: "
-            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -137,7 +133,6 @@
             android:layout_margin="5dp"
             android:fontFamily="@font/ubuntu_light"
             android:text="Pressure: "
-            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -148,7 +143,6 @@
             android:layout_margin="5dp"
             android:fontFamily="@font/ubuntu_light"
             android:text="Humidity: "
-            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>

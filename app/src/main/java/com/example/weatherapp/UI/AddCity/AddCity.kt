@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import com.example.weatherapp.Adapters.ManageCitiesAdapter
 import com.example.weatherapp.Constants.Constants
 import com.example.weatherapp.Constants.Constants.data
 import com.example.weatherapp.Constants.Constants.locations
@@ -29,8 +30,13 @@ class AddCity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setUpRecyclerView()
         searchCity()
         goBack()
+    }
+
+    fun setUpRecyclerView() {
+        binding.citiesRecyclerView.adapter = ManageCitiesAdapter(data)
     }
 
     private fun goBack() {
@@ -69,16 +75,13 @@ class AddCity : AppCompatActivity() {
                     call: Call<WeatherData?>, response: Response<WeatherData?>
                 ) {
                     val res = response.body() as WeatherData
-                    if (res !in data) {
+                    if (res.name !in locations) {
                         data.add(res)
                         binding.searchCityEditText.text.clear()
                     } else {
                         Toast.makeText(
-                            context,
-                            "$cityName is already added",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                            context, "$cityName is already added", Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 

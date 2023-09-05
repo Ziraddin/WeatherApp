@@ -69,4 +69,7 @@ dependencies {
 
     //Biometric Authetication
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation("com.google.code.gson:gson:2.9.0")
 }
